@@ -1,0 +1,13 @@
+collection_name: agent
+persist_directory: chroma_db
+bm25_path: chroma_bm25/bm25.json
+k: 5
+data_path: data
+md5_hex_store: md5.text
+allow_knowledge_file_type: ["txt", "pdf"]
+
+chunk_size: 100
+chunk_overlap: 40
+separators: ["\n\n", "\n", ".", "!", "?", "。", "！", "？", " ", ""]
+
+reranker_model_path: models/bge-reranker-v2-m3

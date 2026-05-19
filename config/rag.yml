@@ -1,0 +1,6 @@
+# ========== 以下为评估模式使用的 Ollama 本地模型 ==========
+chat_model_name: qwen2.5:7b
+embedding_model_name: nomic-embed-text
+# ========== 原配置(DashScope/阿里云)，如需恢复请取消注释并注释上方配置 ==========
+# chat_model_name: qwen3-max
+# embedding_model_name: text-embedding-v3

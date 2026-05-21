@@ -20,6 +20,8 @@ chroma_db/
 chroma_bm25/
 **/chroma_db/
 *.sqlite3
+memory_data/              # 长期记忆数据目录（用户信息和对话历史）
+memory_data/**            # 目录下的所有文件
 
 # ========== 日志 ==========
 log/
@@ -63,4 +65,5 @@ RAG评估报告.md
 # ========== 敏感数据 ==========
 data/external/*.csv
 
-
+# ========== 数据库配置（含密码） ==========
+config/database.yml

@@ -39,6 +39,14 @@ def load_agent_config(config_path: str=get_abs_path('config/agent.yml'),encoding
         # 以 FullLoader 的方式把 YAML 的文本转化为 Python 对象
         return yaml.load(f,Loader=yaml.FullLoader)
 
+def load_database_config(config_name: str=get_abs_path(f'config/database.yml'), encoding: str='utf-8'):
+    """
+    取出database的配置
+    """
+    with open(config_name, "r", encoding=encoding) as f:
+        # 以 FullLoader 的方式把 YAML 的文本转化为 Python 对象
+        return yaml.load(f,Loader=yaml.FullLoader)
+
 rag_conf = load_rag_config()
 chroma_conf = load_chroma_config()
 prompts_conf = load_prompts_config()

@@ -65,5 +65,3 @@ RAG评估报告.md
 # ========== 敏感数据 ==========
 data/external/*.csv
 
-# ========== 数据库配置（含密码） ==========
-config/database.yml

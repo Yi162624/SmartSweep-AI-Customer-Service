@@ -1,0 +1,9 @@
+host: localhost
+port: 3306
+user: root
+password: "YOUR_DB_PASSWORD"
+database: sweeper_robot
+charset: utf8mb4
+connect_timeout: 10
+read_timeout: 30
+table_prefix: ""

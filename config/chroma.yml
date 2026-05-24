@@ -11,3 +11,15 @@ chunk_overlap: 40
 separators: ["\n\n", "\n", ".", "!", "?", "。", "！", "？", " ", ""]
 
 reranker_model_path: models/bge-reranker-v2-m3
+
+# ========== Milvus 配置 ==========
+milvus:
+  host: localhost         # Milvus 服务器地址
+  port: 19530             # Milvus 服务端口
+  collection_name: rag_embeddings  # 集合名称
+  metric_type: IP         # 相似度计算方式（内积相似度）
+  index_type: HNSW        # 索引类型
+  dim: 768                # 向量维度
+  nlist: 1024             # 聚类数量
+  nprobe: 16              # 查询搜索范围
+  use_milvus_lite: true   # true=Milvus Lite模式（无需Docker），false=Docker Milvus模式

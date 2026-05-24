@@ -56,22 +56,6 @@ class EmbeddingsFactory(BaseModelFactory):
         return OllamaEmbeddingsWrapper(model_name=rag_conf["embedding_model_name"])
 
 
-# ========== 原 DashScope 实现（保留注释，便于恢复） ==========
-"""
-# 自定义嵌入模型，区分 query 和 document
-class CorrectV4Embeddings(Embeddings):
-    def __init__(self, model_name: str = "text-embedding-v4", api_key: str = None):
-        self.model_name = model_name
-        self.doc_embedding = DashScopeEmbeddings(model=model_name, dashscope_api_key=api_key)
-        self.query_embedding = DashScopeEmbeddings(model=model_name, dashscope_api_key=api_key)
-
-    def embed_documents(self, texts: list[str]) -> list[list[float]]:
-        return self.doc_embedding.embed_documents(texts)
-
-    def embed_query(self, text: str) -> list[float]:
-        return self.query_embedding.embed_query(text)
-"""
-
 
 chat_model = ChatModelFactory().generator()
 embed_model = EmbeddingsFactory().generator()

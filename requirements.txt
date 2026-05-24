@@ -6,9 +6,12 @@ langchain-community>=0.4.0
 langchain-chroma>=1.1.0
 langchain-ollama>=1.1.0
 langchain-text-splitters>=1.1.0
+langchain-experimental>=0.3.0
 
 # ===== 向量数据库 =====
 chromadb>=1.5.0
+pymilvus>=2.4.0
+milvus-lite>=3.0
 
 # ===== AI 模型 =====
 ollama>=0.6.0

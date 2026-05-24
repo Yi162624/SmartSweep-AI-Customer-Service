@@ -1,3 +1,5 @@
-main_prompt_path: prompts/main_prompt.txt
-rag_summarize_prompt_path: prompts/rag_summarize.txt
-report_prompt_path: prompts/report_prompt.txt
+main_prompt_path: prompts/main_prompt.txt             # 系统提示词路径
+rag_summarize_prompt_path: prompts/rag_summarize.txt  # RAG总结提示词
+report_prompt_path: prompts/report_prompt.txt         # 报告生成提示词
+scoring_prompt_path: prompts/scoring_prompt.txt       # 评分门控提示词
+rewrite_prompt_path: prompts/rewrite_prompt.txt       # 查询重写提示词

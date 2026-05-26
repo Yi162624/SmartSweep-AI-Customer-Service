@@ -43,7 +43,9 @@ class DatabaseConfig:
                 "charset": config.get("charset", "utf8mb4"),
                 "connect_timeout": config.get("connect_timeout", 10),
                 "read_timeout": config.get("read_timeout", 30),
-                "write_timeout": config.get("write_timeout", 30)
+                "write_timeout": config.get("write_timeout", 30),
+                "ssl": None,
+                "autocommit": True
             }
             self._table_prefix = config.get("table_prefix", "")
             logger.info("[database] 数据库配置加载成功")

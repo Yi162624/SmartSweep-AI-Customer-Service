@@ -44,7 +44,7 @@ class OllamaEmbeddingsWrapper(Embeddings):
         return self.embedding.embed_documents(texts)
 
     def embed_query(self, text: str) -> list[float]:
-        # 检索时 ——把用户的问题转成向量，去 Chroma 里做相似度搜索
+        # 检索时 ——把用户的问题转成向量，去 Milvus 里做相似度搜索
         return self.embedding.embed_query(text)
 
 

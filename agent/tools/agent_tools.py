@@ -218,7 +218,7 @@ def get_user_location() -> str:
 
 
 @tool(description="从向量存储中检索参考资料")     # RAG
-def rag_summarsize(query: str) -> str:
+def rag_summarize(query: str) -> str:
     return rag.rag_summarize(query)
 
 

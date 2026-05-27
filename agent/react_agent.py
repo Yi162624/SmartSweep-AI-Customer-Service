@@ -17,7 +17,7 @@ class ReactAgent:
         self.agent = create_agent(
             model=chat_model,                       # 模型
             system_prompt=load_system_prompts(),    # 提示词（包含工具调用说明）
-            tools=[rag_summariesze,get_weather,get_user_location,get_user_id,         # 工具列表
+            tools=[rag_summarize,get_weather,get_user_location,get_user_id,         # 工具列表
                    get_current_month,fetch_external_data,fill_context_for_report],
             middleware=[monitor_tool,log_before_model,report_prompt_switch],         # 中间件（监控/日志/提示词切换）
         )

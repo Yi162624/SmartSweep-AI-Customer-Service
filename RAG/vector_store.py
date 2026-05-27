@@ -51,7 +51,7 @@ class VectorStoreService:
                 connections.connect("default", uri=lite_uri)
                 logger.info(f"[Milvus Lite 3.x] 已启动嵌入式服务器: {lite_uri}")
         else:
-            # Docker Milvus 模式：直接连接到 Docker Milvus 服务器
+            # Docker Milvus 模式（独立服务）：直接连接到 Docker Milvus 服务器
             connections.connect("default", host=self.host, port=self.port)
             logger.info(f"[Milvus Docker] 已连接到 {self.host}:{self.port}")
 

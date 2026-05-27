@@ -26,9 +26,11 @@ class VectorStoreService:
         self.collection_name = milvus_config.get('collection_name', 'rag_embeddings')
         self.metric_type = milvus_config.get('metric_type', 'IP')
         self.index_type = milvus_config.get('index_type', 'HNSW')
-        self.dim = milvus_config.get('dim', 768)
         self.nlist = milvus_config.get('nlist', 1024)
         self.nprobe = milvus_config.get('nprobe', 16)
+        
+        # 动态检测嵌入模型维度（避免硬编码）
+        self.dim = self._detect_embedding_dimension(milvus_config)
 
         # Milvus Lite 模式检查（用于区分 Docker Milvus 和 Milvus Lite）
         use_milvus_lite = milvus_config.get('use_milvus_lite', False)
@@ -71,6 +73,28 @@ class VectorStoreService:
 
         # 尝试加载已经存在的bm25文件
         self._load_bm25_data()
+
+
+    def _detect_embedding_dimension(self, milvus_config: dict) -> int:
+        """
+        动态检测嵌入模型的向量维度
+        优先使用配置值，否则通过测试嵌入获取实际维度
+        """
+        # 1.优先使用配置值（如果你明确知道维度）
+        if 'dim' in milvus_config:
+            return milvus_config['dim']
+        
+        # 2.动态检测：尝试嵌入一个测试字符串，获取其维度
+        try:
+            test_embedding = embed_model.embed_query("test")
+            dim = len(test_embedding)
+            logger.info(f"[Milvus] 自动检测嵌入维度: {dim}")
+            return dim
+        except Exception as e:
+            # 3.检测失败时使用默认值
+            default_dim = 768
+            logger.warning(f"[Milvus] 维度检测失败，使用默认值 {default_dim}: {e}")
+            return default_dim
 
 
     def _get_or_create_collection(self):
@@ -389,7 +413,7 @@ class MilvusRetriever(BaseRetriever):
 
 
 if __name__ == "__main__":
-    vs = VectorStroreService()
+    vs = VectorStoreService()
     vs.load_document()
     retriever = vs.get_retriever()   # 检索器
     res = retriever.invoke("迷路")

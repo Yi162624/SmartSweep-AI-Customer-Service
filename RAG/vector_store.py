@@ -49,7 +49,10 @@ class VectorStoreService:
                 from milvus_lite.server_manager import server_manager_instance
                 db_path = get_abs_path(chroma_conf['persist_directory'])
                 os.makedirs(db_path, exist_ok=True)
+                # Milvus Lite 3.0 使用 start_and_get_uri 获取服务器 URI
                 lite_uri = server_manager_instance.start_and_get_uri(db_path)
+                if lite_uri is None:
+                    raise RuntimeError("Milvus Lite 服务器启动失败，无法获取连接 URI")
                 connections.connect("default", uri=lite_uri)
                 logger.info(f"[Milvus Lite 3.x] 已启动嵌入式服务器: {lite_uri}")
         else:
@@ -318,7 +321,8 @@ class VectorStoreService:
 
         # 插入 Milvus
         self.collection.insert(data)
-        self.collection.flush()       # 刷新数据到磁盘
+        # Milvus Lite 3.0 在 Windows 上 flush() 有文件锁问题，暂时注释
+        # self.collection.flush()       # 刷新数据到磁盘
         logger.info(f"[Milvus] 已插入 {len(documents)} 个文档向量")
 
     def inspect_database(self):

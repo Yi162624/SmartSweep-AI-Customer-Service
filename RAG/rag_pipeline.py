@@ -16,11 +16,17 @@ from utils.prompt_loader import load_scoring_prompt, load_rewrite_prompt
 from utils.config_handler import chroma_conf
 from utils.path_tool import get_abs_path
 from utils.logger_handler import logger
-from FlagEmbedding import FlagReranker
 
 import os
-os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'  # 使用国内镜像
-local_model_path = get_abs_path(chroma_conf["reranker_model_path"])    # 重排序模型
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+
+from FlagEmbedding import FlagReranker
+
+# 重排序模型：优先使用本地路径，不存在则用 HuggingFace 模型名
+RERANKER_MODEL = "BAAI/bge-reranker-v2-m3"
+_local_model_path = get_abs_path(chroma_conf["reranker_model_path"])
+if os.path.isdir(os.path.normpath(_local_model_path)):
+    RERANKER_MODEL = os.path.normpath(_local_model_path)
 
 
 # ========== Pydantic Schema（数据模板）（用于 with_structured_output） ==========
@@ -122,7 +128,7 @@ def _get_reranker():
     """获取 FlagReranker 单例（避免每次调用重复加载模型）"""
     global _reranker
     if _reranker is None:
-        _reranker = FlagReranker(local_model_path, use_fp16=True)
+        _reranker = FlagReranker(RERANKER_MODEL, use_fp16=True)
     return _reranker
 
 

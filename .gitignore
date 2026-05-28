@@ -61,7 +61,8 @@ agent_copy/
 # ========== 个人文档 ==========
 面试准备题目.md
 RAG评估报告.md
+LangGraph_RAG_评估报告.md
+RAG二次评估报告.md
 
 # ========== 敏感数据 ==========
 data/external/*.csv
-
